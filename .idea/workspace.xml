@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe80a14f-e34e-4dc1-8657-f07e01afa6d3" name="Changes" comment="Phase 3 &amp; 4: Features development &#10;1. Admin Dashboard &#10;2. Ai Resume Feedback&#10;3. Job Matchings">
+    <list default="true" id="fe80a14f-e34e-4dc1-8657-f07e01afa6d3" name="Changes" comment="Updated the main.py logic for deleting the resumes and jobs all at one go (bulk).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mongodb_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/mongodb_config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759299331370</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated the main.py logic for deleting the resumes and jobs all at one go (bulk).">
+      <option name="closed" value="true" />
+      <created>1759304375889</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759304375889</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,6 +120,7 @@
     <MESSAGE value="Phase 1: Initial project structure" />
     <MESSAGE value="Phase 2: Resume Parsing and Storage in MongoDB" />
     <MESSAGE value="Phase 3 &amp; 4: Features development &#10;1. Admin Dashboard &#10;2. Ai Resume Feedback&#10;3. Job Matchings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Phase 3 &amp; 4: Features development &#10;1. Admin Dashboard &#10;2. Ai Resume Feedback&#10;3. Job Matchings" />
+    <MESSAGE value="Updated the main.py logic for deleting the resumes and jobs all at one go (bulk)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the main.py logic for deleting the resumes and jobs all at one go (bulk)." />
   </component>
 </project>
