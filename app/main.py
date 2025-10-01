@@ -1,13 +1,10 @@
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import streamlit as st
 import pdfplumber
 import json
 import pandas as pd
 
-from app.resume_parser import parse_resume_text, ai_parse_resume_text
-from app.mongodb_config import (
+from resume_parser import parse_resume_text, ai_parse_resume_text
+from mongodb_config import (
     resumes_collection,
     jobs_collection,
     users_collection,
@@ -15,18 +12,17 @@ from app.mongodb_config import (
     authenticate_user,
     safe_update_role,
     safe_delete_user,
-    SUPERADMIN_EMAIL
+    SUPERADMIN_EMAIL,
 )
-from app.matching_engine import match_resume_to_jobs
-from app.ai_assistant import ai_resume_feedback
-from app.jobs_utils import refresh_jobs
-
+from matching_engine import match_resume_to_jobs
+from ai_assistant import ai_resume_feedback
+from jobs_utils import refresh_jobs
 
 # --- App Config ---
 st.set_page_config(page_title="AI Resume Analyzer", layout="wide")
 st.title("📄 AI-Powered Resume Analyzer")
 
-# --- Session State ---
+# --- Session State (login/logout) ---
 if "user" not in st.session_state:
     st.session_state["user"] = None
 
@@ -51,13 +47,13 @@ if not st.session_state["user"]:
 
     else:  # Sign Up
         if st.button("Sign Up"):
-            result = register_user(email, password)
+            result = register_user(email, password, role="user")
             if "success" in result:
                 st.success("✅ User registered successfully. Please login now.")
             else:
                 st.error(result["error"])
 
-    st.stop()
+    st.stop()  # ⛔ Stop app until login is done
 
 # --- Show after login ---
 user = st.session_state["user"]
@@ -179,7 +175,6 @@ if user["role"] in ["admin", "superadmin"] and admin_tab:
         total_resumes = resumes_collection.count_documents({})
         total_jobs = jobs_collection.count_documents({})
         st.write(f"👤 Users: {total_users} | 📄 Resumes: {total_resumes} | 💼 Jobs: {total_jobs}")
-
         st.markdown("---")
 
         # --- User Management ---
@@ -190,28 +185,22 @@ if user["role"] in ["admin", "superadmin"] and admin_tab:
                 col1, col2, col3 = st.columns([3, 1, 1])
                 with col1:
                     st.write(f"{u['email']} ({u.get('role', 'user')})")
-                # Hide role toggle/delete for superadmin
+
+                # Prevent role changes for superadmin
                 if u["email"] == SUPERADMIN_EMAIL:
                     with col2:
                         st.info("Superadmin")
-                    continue
-                with col2:
-                    if st.button(f"Promote/Demote {u['email']}", key=f"role_{u['email']}"):
-                        new_role = "admin" if u.get("role") == "user" else "user"
-                        result = safe_update_role(u["email"], new_role)
-                        if "success" in result:
-                            st.success(f"Role updated to {new_role}")
+                else:
+                    with col2:
+                        if st.button(f"Promote/Demote {u['email']}", key=f"role_{u['email']}"):
+                            safe_update_role(u["email"], u.get("role", "user"))
+                            st.success("Role updated")
                             st.rerun()
-                        else:
-                            st.error(result["error"])
-                with col3:
-                    if st.button(f"Delete {u['email']}", key=f"delete_{u['email']}"):
-                        result = safe_delete_user(u["email"])
-                        if "success" in result:
+                    with col3:
+                        if st.button(f"Delete {u['email']}", key=f"delete_{u['email']}"):
+                            safe_delete_user(u["email"])
                             st.warning(f"User {u['email']} deleted")
                             st.rerun()
-                        else:
-                            st.error(result["error"])
         else:
             st.info("No users found.")
 
@@ -230,12 +219,10 @@ if user["role"] in ["admin", "superadmin"] and admin_tab:
                         st.warning("Resume deleted")
                         st.rerun()
 
-            # Export all resumes
             all_resumes = list(resumes_collection.find({}, {"_id": 0}))
             if all_resumes:
                 json_data = json.dumps(all_resumes, indent=4)
                 csv_data = pd.DataFrame(all_resumes).to_csv(index=False)
-
                 st.download_button("⬇️ Download Resumes (JSON)", data=json_data, file_name="all_resumes.json", mime="application/json")
                 st.download_button("⬇️ Download Resumes (CSV)", data=csv_data, file_name="all_resumes.csv", mime="text/csv")
         else:
@@ -256,18 +243,15 @@ if user["role"] in ["admin", "superadmin"] and admin_tab:
                         st.warning("Job deleted")
                         st.rerun()
 
-            # Export all jobs
             all_jobs = list(jobs_collection.find({}, {"_id": 0}))
             if all_jobs:
                 json_data = json.dumps(all_jobs, indent=4)
                 csv_data = pd.DataFrame(all_jobs).to_csv(index=False)
-
                 st.download_button("⬇️ Download Jobs (JSON)", data=json_data, file_name="all_jobs.json", mime="application/json")
                 st.download_button("⬇️ Download Jobs (CSV)", data=csv_data, file_name="all_jobs.csv", mime="text/csv")
         else:
             st.info("No jobs found.")
 
-        # Refresh jobs from Jooble
         keywords = st.text_input("Keywords", "Data Scientist", key="admin_kw")
         location = st.text_input("Location", "India", key="admin_loc")
         if st.button("🔄 Refresh Jobs Now (Admin)"):
