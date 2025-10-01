@@ -5,7 +5,7 @@ import streamlit as st
 import pdfplumber
 import json
 import pandas as pd
-
+from bson import ObjectId
 
 from app.resume_parser import parse_resume_text, ai_parse_resume_text
 from app.mongodb_config import (
@@ -42,7 +42,7 @@ if not st.session_state["user"]:
             if user:
                 st.session_state["user"] = user
                 st.success(f"✅ Logged in as {user['email']} ({user['role']})")
-                st.rerun()  # ✅ updated
+                st.rerun()
             else:
                 st.error("❌ Invalid email or password")
 
@@ -62,7 +62,7 @@ user = st.session_state["user"]
 st.success(f"✅ Logged in as {user['email']} ({user['role']})")
 if st.button("Logout"):
     st.session_state["user"] = None
-    st.rerun()  # ✅ updated
+    st.rerun()
 
 # --- Tabs ---
 tabs = [
@@ -182,7 +182,6 @@ with tab4:
                 st.json(feedback)
 
 # --- Admin Dashboard ---
-# --- Admin Dashboard ---
 if user["role"] == "admin" and admin_tab:
     with admin_tab[0]:
         st.subheader("🛠 Admin Dashboard")
@@ -224,15 +223,15 @@ if user["role"] == "admin" and admin_tab:
         resumes = list(resumes_collection.find().limit(5))
         if resumes:
             for r in resumes:
-                r["_id"] = str(r["_id"])
+                oid = str(r["_id"])
                 with st.expander(f"Resume: {r.get('Email', 'Unknown')}"):
                     st.json(r)
-                    if st.button(f"Delete Resume {r['_id']}", key=f"res_{r['_id']}"):
-                        resumes_collection.delete_one({"_id": r["_id"]})
+                    if st.button(f"Delete Resume {oid}", key=f"res_{oid}"):
+                        resumes_collection.delete_one({"_id": ObjectId(oid)})
                         st.warning("Resume deleted")
                         st.rerun()
 
-            # Export all resumes
+            # Export + Bulk Delete
             all_resumes = list(resumes_collection.find({}, {"_id": 0}))
             if all_resumes:
                 json_data = json.dumps(all_resumes, indent=4)
@@ -242,6 +241,15 @@ if user["role"] == "admin" and admin_tab:
                                    file_name="all_resumes.json", mime="application/json")
                 st.download_button("⬇️ Download Resumes (CSV)", data=csv_data,
                                    file_name="all_resumes.csv", mime="text/csv")
+
+                confirm = st.text_input("Type DELETE to remove ALL resumes")
+                if st.button("🗑️ Delete ALL Resumes"):
+                    if confirm == "DELETE":
+                        resumes_collection.delete_many({})
+                        st.error("⚠️ All resumes deleted")
+                        st.rerun()
+                    else:
+                        st.warning("⚠️ You must type DELETE to confirm")
         else:
             st.info("No resumes found.")
 
@@ -252,15 +260,15 @@ if user["role"] == "admin" and admin_tab:
         jobs = list(jobs_collection.find().limit(5))
         if jobs:
             for j in jobs:
-                j["_id"] = str(j["_id"])
+                oid = str(j["_id"])
                 with st.expander(f"Job: {j.get('title', 'Unknown')} @ {j.get('company', 'N/A')}"):
                     st.json(j)
-                    if st.button(f"Delete Job {j['_id']}", key=f"job_{j['_id']}"):
-                        jobs_collection.delete_one({"_id": j["_id"]})
+                    if st.button(f"Delete Job {oid}", key=f"job_{oid}"):
+                        jobs_collection.delete_one({"_id": ObjectId(oid)})
                         st.warning("Job deleted")
                         st.rerun()
 
-            # Export all jobs
+            # Export + Bulk Delete
             all_jobs = list(jobs_collection.find({}, {"_id": 0}))
             if all_jobs:
                 json_data = json.dumps(all_jobs, indent=4)
@@ -270,17 +278,14 @@ if user["role"] == "admin" and admin_tab:
                                    file_name="all_jobs.json", mime="application/json")
                 st.download_button("⬇️ Download Jobs (CSV)", data=csv_data,
                                    file_name="all_jobs.csv", mime="text/csv")
+
+                confirm_jobs = st.text_input("Type DELETE to remove ALL jobs")
+                if st.button("🗑️ Delete ALL Jobs"):
+                    if confirm_jobs == "DELETE":
+                        jobs_collection.delete_many({})
+                        st.error("⚠️ All jobs deleted")
+                        st.rerun()
+                    else:
+                        st.warning("⚠️ You must type DELETE to confirm")
         else:
             st.info("No jobs found.")
-
-        # Refresh jobs from Jooble
-        keywords = st.text_input("Keywords", "Data Scientist", key="admin_kw")
-        location = st.text_input("Location", "India", key="admin_loc")
-        if st.button("🔄 Refresh Jobs Now (Admin)"):
-            with st.spinner("Fetching jobs..."):
-                try:
-                    result = refresh_jobs(keywords, location, limit=10)
-                    st.success(f"✅ {result.get('inserted',0)} inserted, {result.get('updated',0)} updated")
-                    st.rerun()
-                except Exception as e:
-                    st.error(f"⚠️ Error refreshing jobs: {e}")
