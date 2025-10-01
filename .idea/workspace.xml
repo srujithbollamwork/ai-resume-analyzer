@@ -4,14 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe80a14f-e34e-4dc1-8657-f07e01afa6d3" name="Changes" comment="Phase 1: Initial project structure">
-      <change afterPath="$PROJECT_DIR$/app/mongodb_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_mongo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_resume_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="fe80a14f-e34e-4dc1-8657-f07e01afa6d3" name="Changes" comment="Phase 2: Resume Parsing and Storage in MongoDB">
+      <change afterPath="$PROJECT_DIR$/ai_assistant.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/auth_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/jobs_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/matching_engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/import_jobs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job_fetcher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jobs_sample.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_get_jobs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_imports.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_jooble.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_matching.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ai-resume-analyzer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ai-resume-analyzer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ai_assistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ai_assistant.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/resume_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/resume_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mongodb_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/mongodb_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,9 +61,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "S:/ai-resume-analyzer"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="S:\ai-resume-analyzer" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759169405339</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Phase 2: Resume Parsing and Storage in MongoDB">
+      <option name="closed" value="true" />
+      <created>1759248380042</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759248380042</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -93,6 +117,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Phase 1: Initial project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Phase 1: Initial project structure" />
+    <MESSAGE value="Phase 2: Resume Parsing and Storage in MongoDB" />
+    <option name="LAST_COMMIT_MESSAGE" value="Phase 2: Resume Parsing and Storage in MongoDB" />
   </component>
 </project>

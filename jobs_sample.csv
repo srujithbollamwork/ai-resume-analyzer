@@ -1,0 +1,11 @@
+title,company,location,skills_required,description
+Data Scientist,TechNova,Remote,"Python, Machine Learning, SQL, Statistics","Looking for a Data Scientist to work on predictive models and big data pipelines."
+Backend Developer,CodeWorks,Hyderabad,"Java, Spring Boot, Docker, SQL","Responsible for building scalable backend services using Spring Boot and containerized environments."
+Frontend Engineer,PixelSoft,Bangalore,"JavaScript, React, HTML, CSS","Develop responsive web applications with React and collaborate with design teams."
+AI Research Intern,DeepAI,Remote,"Python, Deep Learning, PyTorch, NLP","Assist research team with experiments in NLP and computer vision models."
+DevOps Engineer,CloudOps,Chennai,"AWS, Docker, Kubernetes, CI/CD","Manage cloud infrastructure and automate deployment pipelines."
+Business Analyst,FinEdge,Mumbai,"Excel, SQL, Data Visualization, Communication","Analyze business data and provide insights for financial strategies."
+Mobile App Developer,Appify,Delhi,"Kotlin, Android, REST APIs, Firebase","Develop and maintain Android applications with Firebase integration."
+Full Stack Developer,InnoTech,Pune,"JavaScript, Node.js, React, MongoDB","Work across backend and frontend with emphasis on modern web technologies."
+Data Engineer,DataWorks,Bangalore,"Python, Spark, Hadoop, ETL","Design and maintain data pipelines using big data frameworks."
+Cybersecurity Analyst,Securitas,Remote,"Network Security, Python, SIEM, Risk Analysis","Monitor and secure enterprise systems from cyber threats."
