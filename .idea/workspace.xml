@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe80a14f-e34e-4dc1-8657-f07e01afa6d3" name="Changes" comment="Fixed a loophole of users and admin">
+    <list default="true" id="fe80a14f-e34e-4dc1-8657-f07e01afa6d3" name="Changes" comment="Fixed a loophole of users and admin reported bugs">
+      <change afterPath="$PROJECT_DIR$/app/ats_checker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mongodb_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/mongodb_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759314671615</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed a loophole of users and admin reported bugs">
+      <option name="closed" value="true" />
+      <created>1759315054232</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759315054232</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +139,7 @@
     <MESSAGE value="Phase 3 &amp; 4: Features development &#10;1. Admin Dashboard &#10;2. Ai Resume Feedback&#10;3. Job Matchings" />
     <MESSAGE value="Updated the main.py logic for deleting the resumes and jobs all at one go (bulk)." />
     <MESSAGE value="Fixed a loophole of users and admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a loophole of users and admin" />
+    <MESSAGE value="Fixed a loophole of users and admin reported bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a loophole of users and admin reported bugs" />
   </component>
 </project>
